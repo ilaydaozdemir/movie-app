@@ -10,15 +10,16 @@ const App: React.FC = () => {
   const [totalPages, setTotalPages] = useState<number>(1);
   const [searchTerm, setSearchTerm] = useState<string>("Pokemon");
   const [selectedYear, setSelectedYear] = useState<string>("");
+  const [searchType, setSearchType] = useState<string>("movie");
 
   const apiKey = "e6582eee";
-
   const moviesPerPage = 10; //per page
+
   useEffect(() => {
     const fetchMovies = async () => {
       const yearParam = selectedYear ? `&y=${selectedYear}` : "";
       const response = await fetch(
-        `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}&page=${currentPage}${yearParam}`
+        `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}&page=${currentPage}&type=${searchType}${yearParam}`
       );
       const data = await response.json();
       if (data.Response === "True") {
@@ -31,7 +32,7 @@ const App: React.FC = () => {
     };
 
     fetchMovies();
-  }, [currentPage, searchTerm, selectedYear]);
+  }, [currentPage, searchTerm, selectedYear, searchType]);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -48,6 +49,12 @@ const App: React.FC = () => {
     setSelectedYear(event.target.value);
     setCurrentPage(1);
   };
+  const handleSearchTypeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setSearchType(event.target.value);
+    setCurrentPage(1);
+  };
   return (
     <div className="app">
       <h1 className="app-title">Movie List</h1>
@@ -60,11 +67,23 @@ const App: React.FC = () => {
         placeholder="Film adı ile ara..."
         className="search-input"
       />
+
+      {/* Search Type Selection (Movie, TV Series, Episode) */}
+      <select
+        value={searchType}
+        onChange={handleSearchTypeChange}
+        className="search-type-select"
+      >
+        <option value="movie">Film</option>
+        <option value="series">TV Dizi</option>
+        <option value="episode">TV Bölümü</option>
+      </select>
+
       {/* Search for year */}
       <select
         value={selectedYear}
         onChange={handleYearChange}
-        className="year-select"
+        className="search-year-select"
       >
         <option value="">Tüm Yıllar</option>
 

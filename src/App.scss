@@ -23,7 +23,9 @@ body {
   margin-bottom: 20px;
 }
 
-.search-input {
+.search-input,
+.search-type-select,
+.search-year-select {
   padding: 10px;
   font-size: 1rem;
   width: 80%;
@@ -32,11 +34,17 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
-  transition: border-color 0.3s ease;
 }
 
-.search-input:focus {
+.search-input:focus,
+.search-type-select:focus,
+.search-year-select:focus {
   border-color: #1e3a8a;
+}
+
+.search-type-select,
+.search-year-select {
+  margin-left: 10px;
 }
 
 .year-select {
