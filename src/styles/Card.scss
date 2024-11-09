@@ -1,0 +1,36 @@
+.card {
+  background-color: #f0f8ff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 16px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-content {
+    .card-title {
+      font-size: 1.2rem;
+      color: #1e3a8a;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .card-release-date,
+    .card-imdb-id {
+      font-size: 1rem;
+      color: #334155;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+/* Responsive */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}

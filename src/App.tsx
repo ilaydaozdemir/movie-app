@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState, useEffect } from "react";
+import CardGrid from "./components/CardGrid";
+import "./App.scss";
+import { Movie } from "./components/Card";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const apiKey = "e6582eee";
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const response = await fetch(
+        `https://www.omdbapi.com/?apikey=${apiKey}&s=Pokemon` // `s=Pokemon` For parameter search
+      );
+      const data = await response.json();
+      if (data.Response === "True") {
+        const movieList: Movie[] = data.Search.map((movie: any) => ({
+          name: movie.Title,
+          releaseDate: movie.Year,
+          imdbID: movie.imdbID,
+        }));
+        setMovies(movieList);
+      } else {
+        console.error("Film bulunamadı", data.Error);
+      }
+    };
+
+    fetchMovies();
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <h1 className="app-title">Movie List</h1>
+      <CardGrid movies={movies} />
+    </div>
+  );
+};
 
-export default App
+export default App;
