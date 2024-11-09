@@ -21,7 +21,7 @@
 
   .pagination-pages {
     display: flex;
-    gap: 5px;
+    gap: 2px;
 
     .pagination-page {
       padding: 8px 12px;
@@ -39,7 +39,7 @@
 
   @media (max-width: 600px) {
     .pagination-button {
-      font-size: 14px;
+      font-size: 8px;
       padding: 8px;
     }
     .pagination-pages .pagination-page {
