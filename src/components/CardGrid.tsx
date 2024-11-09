@@ -10,7 +10,7 @@ interface CardGridProps {
 
 const CardGrid: React.FC<CardGridProps> = ({ movies }) => {
   return (
-    <div className="card-container">
+    <div className="card-grid">
       {movies.map((movie) => (
         <Card key={movie.imdbID} movie={movie} />
       ))}

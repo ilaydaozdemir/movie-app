@@ -2,8 +2,9 @@ import React from "react";
 import "../styles/Card.scss";
 
 export interface Movie {
-  name: string;
-  releaseDate: string;
+  Title: string;
+  Year: string;
+  Poster: string;
   imdbID: string;
 }
 
@@ -14,10 +15,10 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ movie }) => {
   return (
     <div className="card">
+      <img src={movie.Poster} alt={movie.Title} className="card-image" />
       <div className="card-content">
-        <h3 className="card-title">{movie.name}</h3>
-        <p className="card-release-date">{movie.releaseDate}</p>
-        <p className="card-imdb-id">IMDb ID: {movie.imdbID}</p>
+        <h3 className="card-title">{movie.Title}</h3>
+        <p className="card-release-date">{movie.Year}</p>
       </div>
     </div>
   );
