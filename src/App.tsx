@@ -10,7 +10,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="app">
-        <h1 className="app-title">Movie List</h1>
+        <h1 className="app-title">Your Gateway to Movies & TV Shows</h1>
       </div>
       <Routes>
         <Route path="/" element={<HomePage />} /> {/* Main App Route */}

@@ -8,13 +8,13 @@
   .pagination-button {
     padding: 10px;
     margin: 0 10px;
-    background-color: #007bff;
+    background-color: #031931;
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
     &:disabled {
-      background-color: #cccccc;
+      background-color: #0319316e;
       cursor: not-allowed;
     }
   }
@@ -25,14 +25,14 @@
 
     .pagination-page {
       padding: 8px 12px;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
+      background-color: #73a9b1d8;
+      border: 1px solid #0319316e;
       cursor: pointer;
       border-radius: 4px;
       &.active {
-        background-color: #007bff;
+        background-color: #031931;
         color: white;
-        border: 1px solid #007bff;
+        border: 1px solid #031931;
       }
     }
   }

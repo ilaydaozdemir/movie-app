@@ -12,8 +12,8 @@
   background-color: #f0f8ff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  margin: 16px;
+  padding: 2px;
+  margin: 4px;
   transition: transform 0.3s ease;
   display: flex;
   flex-direction: column;
@@ -54,9 +54,22 @@
 /* Responsive */
 .card-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr); /* 4 kolonlu grid */
   gap: 16px;
   padding: 16px;
+
+  /* Responsive tasarım */
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr); /* 3 kolonlu grid */
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr); /* 2 kolonlu grid */
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr; /* 1 kolonlu grid */
+  }
 }
 
 @media (max-width: 768px) {

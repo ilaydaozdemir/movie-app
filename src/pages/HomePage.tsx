@@ -44,7 +44,7 @@ const HomePage: React.FC = () => {
         setMovies(data.Search);
         setTotalPages(Math.ceil(totalResults / moviesPerPage));
       } else {
-        console.error("Film bulunamadı", data.Error);
+        console.error("Movie not found", data.Error);
       }
     };
 
@@ -56,40 +56,50 @@ const HomePage: React.FC = () => {
   };
   return (
     <>
-      {/* Search Input*/}
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        placeholder="Film adı ile ara..."
-        className="search-input"
-      />
+      <div className="input-group">
+        {/* Search Input*/}
+        <div>
+          {" "}
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            placeholder="Search by movie name..."
+            className="search-input"
+          />
+        </div>
+        {/* Search Type Selection (Movie, TV Series, Episode) */}
+        <div>
+          {" "}
+          <select
+            value={searchType}
+            onChange={handleSearchTypeChange}
+            className="search-type-select"
+          >
+            <option value="movie">Film</option>
+            <option value="series">TV Series</option>
+            <option value="episode">TV Episode</option>
+          </select>
+        </div>
 
-      {/* Search Type Selection (Movie, TV Series, Episode) */}
-      <select
-        value={searchType}
-        onChange={handleSearchTypeChange}
-        className="search-type-select"
-      >
-        <option value="movie">Film</option>
-        <option value="series">TV Dizi</option>
-        <option value="episode">TV Bölümü</option>
-      </select>
+        {/* Search for year */}
+        <div>
+          {" "}
+          <select
+            value={selectedYear}
+            onChange={handleYearChange}
+            className="search-year-select"
+          >
+            <option value="">All Years</option>
 
-      {/* Search for year */}
-      <select
-        value={selectedYear}
-        onChange={handleYearChange}
-        className="search-year-select"
-      >
-        <option value="">Tüm Yıllar</option>
-
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-        <option value="2021">2021</option>
-        <option value="2020">2020</option>
-        <option value="2019">2019</option>
-      </select>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+          </select>
+        </div>
+      </div>
 
       <CardGrid movies={currentMovies} />
 

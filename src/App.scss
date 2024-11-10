@@ -2,14 +2,26 @@
   box-sizing: border-box;
 }
 body {
-  margin: 0;
   font-family: "Quicksand", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: radial-gradient(#303b37, #1a1f1d);
-  color: #e1eeeb;
+
+  color: black;
   min-height: 100vh;
+
+  background: conic-gradient(
+    from 90deg at 70% 10%,
+    #101d5b,
+    #223371,
+    #4d3488,
+    #5445a0,
+    #5a58b7,
+    #5e6acf,
+    #607de7,
+    #6190ffa5
+  );
 }
+
 .app {
   text-align: center;
   margin: 0 auto;
@@ -21,8 +33,17 @@ body {
   font-size: 2rem;
   color: #1e3a8a;
   margin-bottom: 20px;
+  letter-spacing: -0.15ch;
+  line-height: 0.75;
+  text-shadow: 0 0.15ch 15px white, 0 -2px 0 darkblue;
 }
-
+.input-group {
+  max-width: 30rem;
+  margin: 2rem auto;
+}
+.search-input {
+  margin-left: 10px;
+}
 .search-input,
 .search-type-select,
 .search-year-select {
@@ -34,6 +55,8 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   outline: none;
+  background-color: whitesmoke;
+  color: black;
 }
 
 .search-input:focus,
