@@ -1,37 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import CardGrid from "../components/CardGrid";
 import Pagination from "../components/Pagination";
-import { Movie } from "../components/Card";
 
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import {
+  setMovies,
+  setSearchTerm,
+  setSearchType,
+  setSelectedYear,
+  setCurrentPage,
+  setTotalPages,
+} from "../features/movies/moviesSlice";
 const HomePage: React.FC = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>("Pokemon");
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [searchType, setSearchType] = useState<string>("movie");
-  const [selectedYear, setSelectedYear] = useState<string>("");
-  const [totalPages, setTotalPages] = useState<number>(1);
+  const dispatch = useDispatch();
+  const {
+    movies,
+    searchTerm,
+    searchType,
+    selectedYear,
+    currentPage,
+    totalPages,
+  } = useSelector((state: RootState) => state.movies);
 
   const apiKey = "e6582eee";
   const moviesPerPage = 10; //per page
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-    setCurrentPage(1);
+    dispatch(setSearchTerm(event.target.value));
   };
+
   const handleSearchTypeChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    setSearchType(event.target.value);
-    setCurrentPage(1);
+    dispatch(setSearchType(event.target.value));
   };
+
   const handleYearChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedYear(event.target.value);
-    setCurrentPage(1);
+    dispatch(setSelectedYear(event.target.value));
   };
-  const currentMovies = movies.slice(
-    (currentPage - 1) * moviesPerPage,
-    currentPage * moviesPerPage
-  );
+
+  const handlePageChange = (page: number) => {
+    dispatch(setCurrentPage(page));
+  };
   useEffect(() => {
     const fetchMovies = async () => {
       const yearParam = selectedYear ? `&y=${selectedYear}` : "";
@@ -41,19 +52,16 @@ const HomePage: React.FC = () => {
       const data = await response.json();
       if (data.Response === "True") {
         const totalResults = parseInt(data.totalResults, 10);
-        setMovies(data.Search);
-        setTotalPages(Math.ceil(totalResults / moviesPerPage));
+        dispatch(setMovies(data.Search));
+        dispatch(setTotalPages(Math.ceil(totalResults / moviesPerPage)));
       } else {
         console.error("Movie not found", data.Error);
       }
     };
 
     fetchMovies();
-  }, [currentPage, searchTerm, selectedYear, searchType]);
+  }, [dispatch, currentPage, searchTerm, selectedYear, searchType]);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
   return (
     <>
       <div className="input-group">
@@ -101,7 +109,7 @@ const HomePage: React.FC = () => {
         </div>
       </div>
 
-      <CardGrid movies={currentMovies} />
+      <CardGrid movies={movies} />
 
       <Pagination
         currentPage={currentPage}

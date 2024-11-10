@@ -5,19 +5,23 @@ import "./App.scss";
 
 import MovieDetails from "./pages/MovieDetailsPage";
 import HomePage from "./pages/HomePage";
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <div className="app">
-        <h1 className="app-title">Your Gateway to Movies & TV Shows</h1>
-      </div>
-      <Routes>
-        <Route path="/" element={<HomePage />} /> {/* Main App Route */}
-        <Route path="/movie/:imdbID" element={<MovieDetails />} />
-        {/* MovieDetails Route */}
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div className="app">
+          <h1 className="app-title">Your Gateway to Movies & TV Shows</h1>
+        </div>
+        <Routes>
+          <Route path="/" element={<HomePage />} /> {/* Main App Route */}
+          <Route path="/movie/:imdbID" element={<MovieDetails />} />
+          {/* MovieDetails Route */}
+        </Routes>
+      </Router>
+    </Provider>
   );
 };
 
