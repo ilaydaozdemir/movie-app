@@ -5,6 +5,7 @@ const Entry: React.FC = () => {
   const [users, setUsers] = useState<boolean>(false);
 
   const onChange = (event: any) => {
+    setUsers(false);
     setUserName(event.target.value);
   };
 
