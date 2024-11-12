@@ -1,21 +1,16 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 const Entry: React.FC = () => {
-  const [userName, setUserName] = useState<string>("");
-  const [users, setUsers] = useState<boolean>(false);
+  const users = useRef<HTMLInputElement>(null);
+  const [userName, setUserName] = useState<string | undefined>(undefined);
 
-  const onChange = (event: any) => {
-    setUsers(false);
-    setUserName(event.target.value);
-  };
-
-  const onClick = () => {
-    setUsers(true);
-  };
+  function onClick() {
+    setUserName(users.current?.value);
+  }
   return (
     <div>
-      <header>Welcome {users ? userName : "unknown user"}</header>
-      <input onChange={onChange} value={userName} />
+      <header>Welcome {userName ?? "unknown user"}</header>
+      <input ref={users} />
       <button onClick={onClick}>Entry</button>
     </div>
   );
